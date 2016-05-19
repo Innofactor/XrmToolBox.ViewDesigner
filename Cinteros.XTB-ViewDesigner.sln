@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3C24DC98-E02C-4450-89EB-239A0A304106}"
+	ProjectSection(SolutionItems) = preProject
+		Cinteros.XTB.ViewDesigner.nuspec = Cinteros.XTB.ViewDesigner.nuspec
+		Cinteros.XTB.ViewDesigner.yml = Cinteros.XTB.ViewDesigner.yml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewDesigner", "ViewDesigner\ViewDesigner.csproj", "{02F62DB0-14BE-4A90-88F6-505E67251D5D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug All Cinteros XTB|Any CPU = Debug All Cinteros XTB|Any CPU
+		Debug Without GemBox|Any CPU = Debug Without GemBox|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{02F62DB0-14BE-4A90-88F6-505E67251D5D}.Debug All Cinteros XTB|Any CPU.ActiveCfg = Debug|Any CPU
+		{02F62DB0-14BE-4A90-88F6-505E67251D5D}.Debug All Cinteros XTB|Any CPU.Build.0 = Debug|Any CPU
+		{02F62DB0-14BE-4A90-88F6-505E67251D5D}.Debug Without GemBox|Any CPU.ActiveCfg = Debug|Any CPU
+		{02F62DB0-14BE-4A90-88F6-505E67251D5D}.Debug Without GemBox|Any CPU.Build.0 = Debug|Any CPU
+		{02F62DB0-14BE-4A90-88F6-505E67251D5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02F62DB0-14BE-4A90-88F6-505E67251D5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02F62DB0-14BE-4A90-88F6-505E67251D5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02F62DB0-14BE-4A90-88F6-505E67251D5D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
