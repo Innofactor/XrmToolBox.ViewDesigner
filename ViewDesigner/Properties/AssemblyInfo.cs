@@ -5,10 +5,10 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyCompany("Cinteros AB")]
-[assembly: AssemblyCopyright("Copyright © Cinteros AB 2015")]
-[assembly: AssemblyTitle("Cinteros ViewDesigner for XrmToolBox")]
-[assembly: AssemblyDescription("ViewDesigner plugin for XrmToolBox by Cinteros AB")]
+[assembly: AssemblyCompany("Innofactor AB")]
+[assembly: AssemblyCopyright("Copyright © Innofactor AB 2015")]
+[assembly: AssemblyTitle("ViewDesigner for XrmToolBox")]
+[assembly: AssemblyDescription("ViewDesigner plugin for XrmToolBox")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyProduct("Cinteros.XrmToolBox.ViewDesigner")]
 [assembly: AssemblyTrademark("")]

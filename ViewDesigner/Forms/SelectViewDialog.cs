@@ -8,6 +8,7 @@
     using Microsoft.Xrm.Sdk.Query;
     using XrmToolBox.Extensibility;
     using AppCode;
+    using Xrm.XmlEditorUtils;
     public partial class SelectViewDialog : Form
     {
         #region Public Fields

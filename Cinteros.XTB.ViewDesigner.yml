@@ -3,6 +3,7 @@ branches:
   only:
   - noautobuilds
 skip_tags: true
+os: Visual Studio 2015
 configuration: Release
 init:
 - ps: Update-AppveyorBuild -Version "1.$(Get-Date -format yyyy.M).$env:appveyor_build_number"
@@ -15,16 +16,13 @@ assembly_info:
 before_build:
 - cmd: nuget restore
 build:
-  project: ViewDesigner\ViewDesigner.csproj
   publish_nuget: true
   verbosity: normal
 after_build:
 - cmd: >-
     nuget pack Cinteros.XTB.ViewDesigner.nuspec -Version %APPVEYOR_BUILD_VERSION%
 
-    7z a Cinteros.XTB.ViewDesigner_%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\Output\%CONFIGURATION%\Cinteros.XTB.ViewDesigner.dll
-
-    7z a Cinteros.XTB.ViewDesigner_%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\Output\%CONFIGURATION%\Cinteros.Xrm.XmlEditorUtils.dll
+    7z a Cinteros.XTB.ViewDesigner_%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\ViewDesigner\bin\%CONFIGURATION%\Cinteros.XTB.ViewDesigner.dll
 
     appveyor PushArtifact Cinteros.XTB.ViewDesigner_%APPVEYOR_BUILD_VERSION%.zip
 artifacts:
@@ -39,7 +37,6 @@ deploy:
   password:
     secure: tlAywufGDNedgIwqqBUmsA==
   folder: rappen/Cinteros
-  active_mode: false
 - provider: NuGet
   api_key:
     secure: e85PnghtumEbD21fvXX7r3CO36xJeFS3kwrPx25rlpa57M5ztBvFjlKAbP85icZA

@@ -3,5 +3,9 @@
 ################################################################################
 
 *.suo
+*/packages
+*/bin
+*/obj
 /packages
-/ViewDesigner/obj
+*.csproj.user
+/Output/Debug
