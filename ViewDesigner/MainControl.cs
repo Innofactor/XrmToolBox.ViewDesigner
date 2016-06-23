@@ -132,7 +132,7 @@
                     MessageBox.Show("XrmToolBox version " + xtbver + " has a minor problem integrating plugins.\nHang in there - new version will be released soon!", "Launching FetchXML Builder",
                         MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
-                else if (MessageBox.Show("FetchXML Builder was not found.\nDownload latest version from\n\nhttp://fxb.xrmtoolbox.com", "FetchXML Builder",
+                else if (MessageBox.Show("FetchXML Builder was not found.\nInstall it from the XrmToolBox Plugin Store or visit\n\nhttp://fxb.xrmtoolbox.com", "FetchXML Builder",
                     MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.OK)
                 {
                     DownloadFXB();

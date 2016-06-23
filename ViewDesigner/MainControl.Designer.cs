@@ -39,8 +39,8 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbSelectColumns = new System.Windows.Forms.ToolStripButton();
             this.tsbSnap = new System.Windows.Forms.ToolStripButton();
-            this.tsbEditFetch = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbEditFetch = new System.Windows.Forms.ToolStripButton();
             this.tsbEditXml = new System.Windows.Forms.ToolStripButton();
             this.ViewEditor = new Cinteros.XTB.ViewDesigner.Controls.ViewEditor();
             this.tsMenu.SuspendLayout();
@@ -140,6 +140,11 @@
             this.tsbSnap.Text = "Snap to Grid";
             this.tsbSnap.Click += new System.EventHandler(this.tsbSnap_Click);
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
             // tsbEditFetch
             // 
             this.tsbEditFetch.Image = ((System.Drawing.Image)(resources.GetObject("tsbEditFetch.Image")));
@@ -149,17 +154,12 @@
             this.tsbEditFetch.Text = "Edit Query";
             this.tsbEditFetch.Click += new System.EventHandler(this.tsbEditFetch_Click);
             // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
             // tsbEditXml
             // 
             this.tsbEditXml.Image = ((System.Drawing.Image)(resources.GetObject("tsbEditXml.Image")));
             this.tsbEditXml.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbEditXml.Name = "tsbEditXml";
-            this.tsbEditXml.Size = new System.Drawing.Size(74, 22);
+            this.tsbEditXml.Size = new System.Drawing.Size(74, 20);
             this.tsbEditXml.Text = "Edit XML";
             this.tsbEditXml.Click += new System.EventHandler(this.tsbEditXml_Click);
             // 

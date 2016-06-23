@@ -13,16 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewDesigner", "ViewDesigne
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug All Cinteros XTB|Any CPU = Debug All Cinteros XTB|Any CPU
-		Debug Without GemBox|Any CPU = Debug Without GemBox|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{02F62DB0-14BE-4A90-88F6-505E67251D5D}.Debug All Cinteros XTB|Any CPU.ActiveCfg = Debug|Any CPU
-		{02F62DB0-14BE-4A90-88F6-505E67251D5D}.Debug All Cinteros XTB|Any CPU.Build.0 = Debug|Any CPU
-		{02F62DB0-14BE-4A90-88F6-505E67251D5D}.Debug Without GemBox|Any CPU.ActiveCfg = Debug|Any CPU
-		{02F62DB0-14BE-4A90-88F6-505E67251D5D}.Debug Without GemBox|Any CPU.Build.0 = Debug|Any CPU
 		{02F62DB0-14BE-4A90-88F6-505E67251D5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{02F62DB0-14BE-4A90-88F6-505E67251D5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02F62DB0-14BE-4A90-88F6-505E67251D5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
