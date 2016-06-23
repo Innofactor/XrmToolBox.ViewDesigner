@@ -12,8 +12,6 @@
     <description>Easy UI to design view layouts and alter queries using FetchXML Builder</description>
     <summary>Easy UI to design view layouts and alter queries using FetchXML Builder</summary>
     <releaseNotes>
-      Please note: This plugin requires the FetchXML Builder to be installed to work properly!
-
       Easy UI to design view layouts and alter queries using FetchXML Builder
     </releaseNotes>
     <copyright>Copyright 2016 Innofactor AB</copyright>
@@ -24,5 +22,6 @@
   </metadata>
   <files>
     <file src="ViewDesigner\bin\Release\Cinteros.XTB.ViewDesigner.dll" target="lib\net452\Plugins" />
+    <file src="ViewDesigner\bin\Release\Cinteros.Xrm.XmlEditorUtils.dll" target="lib\net452\Plugins" />
   </files>
 </package>

@@ -24,6 +24,8 @@ after_build:
 
     7z a Cinteros.XTB.ViewDesigner_%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\ViewDesigner\bin\%CONFIGURATION%\Cinteros.XTB.ViewDesigner.dll
 
+    7z a Cinteros.XTB.ViewDesigner_%APPVEYOR_BUILD_VERSION%.zip %APPVEYOR_BUILD_FOLDER%\ViewDesigner\bin\%CONFIGURATION%\Cinteros.Xrm.XmlEditorUtils.dll
+
     appveyor PushArtifact Cinteros.XTB.ViewDesigner_%APPVEYOR_BUILD_VERSION%.zip
 artifacts:
 - path: '**\Cinteros.XrmToolBox.ViewDesigner.*.nupkg'
