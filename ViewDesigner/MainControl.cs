@@ -8,7 +8,6 @@
     using XrmToolBox.Extensibility.Interfaces;
     using System.Reflection;
     using Forms;
-    using Xrm.FetchXmlBuilder;
     public partial class MainControl : PluginControlBase, IGitHubPlugin, IMessageBusHost, IHelpPlugin
     {
         #region Private Fields
@@ -83,11 +82,9 @@
         public void OnIncomingMessage(MessageBusEventArgs message)
         {
             if (message.SourcePlugin == "FetchXML Builder" &&
-                message.TargetArgument != null &&
-                message.TargetArgument is FXBMessageBusArgument)
+                message.TargetArgument is string)
             {
-                var fxbArg = (FXBMessageBusArgument)message.TargetArgument;
-                UpdateFetch(fxbArg.FetchXML);
+                UpdateFetch(message.TargetArgument);
             }
         }
 
@@ -116,12 +113,7 @@
             try
             {
                 var messageBusEventArgs = new MessageBusEventArgs("FetchXML Builder");
-                var fXBMessageBusArgument = new FXBMessageBusArgument(FXBMessageBusRequest.FetchXML);
-                if (ViewEditor != null && ViewEditor.FetchXml != null && ViewEditor.FetchXml.OuterXml != null)
-                {
-                    fXBMessageBusArgument.FetchXML = ViewEditor.FetchXml.OuterXml;
-                }
-                messageBusEventArgs.TargetArgument = fXBMessageBusArgument;
+                messageBusEventArgs.TargetArgument = ViewEditor.FetchXml.OuterXml;
                 OnOutgoingMessage(this, messageBusEventArgs);
             }
             catch (System.IO.FileNotFoundException)
