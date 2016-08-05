@@ -247,6 +247,14 @@
                         });
 
                         metadata = (EnumAttributeMetadata)retrieveAttributeResponse.AttributeMetadata;
+
+                        // Put metadata value to the cache for 10 minutes
+                        var policy = new CacheItemPolicy
+                        {
+                            AbsoluteExpiration = DateTimeOffset.Now.AddMinutes(10)
+                        };
+
+                        cache.Add(key, metadata, policy);
                     }
 
                     var actualOption = (OptionSetValue)attribute;
@@ -261,7 +269,7 @@
 
                     return string.Empty;
                 }
-                
+
                 return ((OptionSetValue)attribute).Value.ToString();
             }
 
