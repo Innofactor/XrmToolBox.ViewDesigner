@@ -210,6 +210,11 @@
                 return ((EntityReference)attribute).Name;
             }
 
+            if (attribute.GetType() == typeof(Money))
+            {
+                return ((Money)attribute).Value.ToString();
+            }
+
             return attribute as string;
         }
 
