@@ -279,7 +279,23 @@
 
         private void Set(DataCollection<Entity> entities)
         {
-            throw new NotImplementedException();
+            lvDesign.Items.Clear();
+
+            foreach (var entity in entities)
+            {
+                var row = new List<string>();
+
+                foreach (var name in lvDesign.Columns.Cast<ColumnHeader>().Select(x => x.Name).ToArray())
+                {
+                    var item = (entity.Attributes.ContainsKey(name)) ? entity.Attributes[name].ToString() : string.Empty;
+                    row.Add(item);
+                }
+
+                Invoke(new Action(() =>
+                {
+                    lvDesign.Items.Add(new ListViewItem(row.ToArray()));
+                }));
+            }
         }
 
         private void UpdateFetchXml(Entity view)
