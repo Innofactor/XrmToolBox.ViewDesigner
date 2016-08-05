@@ -42,6 +42,8 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbEditFetch = new System.Windows.Forms.ToolStripButton();
             this.tsbEditXml = new System.Windows.Forms.ToolStripButton();
+            this.tsbLivePreview = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.ViewEditor = new Cinteros.XTB.ViewDesigner.Controls.ViewEditor();
             this.tsMenu.SuspendLayout();
             this.SuspendLayout();
@@ -56,6 +58,8 @@
             this.tsbSave,
             this.tsbPublish,
             this.toolStripSeparator3,
+            this.tsbLivePreview,
+            this.toolStripSeparator4,
             this.tsbSelectColumns,
             this.tsbSnap,
             this.toolStripSeparator2,
@@ -63,7 +67,8 @@
             this.tsbEditXml});
             this.tsMenu.Location = new System.Drawing.Point(0, 0);
             this.tsMenu.Name = "tsMenu";
-            this.tsMenu.Size = new System.Drawing.Size(600, 25);
+            this.tsMenu.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.tsMenu.Size = new System.Drawing.Size(900, 25);
             this.tsMenu.TabIndex = 1;
             this.tsMenu.Text = "toolStrip1";
             // 
@@ -159,9 +164,22 @@
             this.tsbEditXml.Image = ((System.Drawing.Image)(resources.GetObject("tsbEditXml.Image")));
             this.tsbEditXml.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbEditXml.Name = "tsbEditXml";
-            this.tsbEditXml.Size = new System.Drawing.Size(74, 20);
+            this.tsbEditXml.Size = new System.Drawing.Size(74, 22);
             this.tsbEditXml.Text = "Edit XML";
             this.tsbEditXml.Click += new System.EventHandler(this.tsbEditXml_Click);
+            // 
+            // tsbLivePreview
+            // 
+            this.tsbLivePreview.Image = ((System.Drawing.Image)(resources.GetObject("tsbLivePreview.Image")));
+            this.tsbLivePreview.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbLivePreview.Name = "tsbLivePreview";
+            this.tsbLivePreview.Size = new System.Drawing.Size(92, 22);
+            this.tsbLivePreview.Text = "Live Preview";
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
             // ViewEditor
             // 
@@ -171,20 +189,22 @@
             this.ViewEditor.IsLayoutXmlChanged = false;
             this.ViewEditor.Location = new System.Drawing.Point(0, 25);
             this.ViewEditor.LogicalName = null;
+            this.ViewEditor.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.ViewEditor.Name = "ViewEditor";
-            this.ViewEditor.Size = new System.Drawing.Size(600, 375);
+            this.ViewEditor.Size = new System.Drawing.Size(900, 590);
             this.ViewEditor.TabIndex = 2;
             this.ViewEditor.Title = null;
             this.ViewEditor.ViewEntityName = null;
             // 
             // MainControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.ViewEditor);
             this.Controls.Add(this.tsMenu);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "MainControl";
-            this.Size = new System.Drawing.Size(600, 400);
+            this.Size = new System.Drawing.Size(900, 615);
             this.tsMenu.ResumeLayout(false);
             this.tsMenu.PerformLayout();
             this.ResumeLayout(false);
@@ -208,5 +228,7 @@
         private System.Windows.Forms.ToolStripButton tsbSelectColumns;
         private Controls.ViewEditor ViewEditor;
         private System.Windows.Forms.ToolStripButton tsbEditXml;
+        private System.Windows.Forms.ToolStripButton tsbLivePreview;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
     }
 }
