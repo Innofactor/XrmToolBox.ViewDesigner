@@ -1,13 +1,14 @@
 ﻿namespace Cinteros.XTB.ViewDesigner
 {
-    using System;
-    using System.Windows.Forms;
+    using Forms;
     using Microsoft.Crm.Sdk.Messages;
     using Microsoft.Xrm.Sdk;
+    using System;
+    using System.Reflection;
+    using System.Windows.Forms;
     using XrmToolBox.Extensibility;
     using XrmToolBox.Extensibility.Interfaces;
-    using System.Reflection;
-    using Forms;
+
     public partial class MainControl : PluginControlBase, IGitHubPlugin, IMessageBusHost, IHelpPlugin
     {
         #region Private Fields
@@ -276,7 +277,6 @@
 
         private void tsbLivePreview_Click(object sender, EventArgs e)
         {
-
         }
     }
 }
