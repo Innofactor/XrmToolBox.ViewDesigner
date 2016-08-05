@@ -239,9 +239,10 @@
         {
             if (ViewEditor == null || ViewEditor.FetchXml == null)
             {
-                MessageBox.Show("First select a view to design.", "Columns", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("First select a view to design.", "Edit Columns", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
             var select = new SelectColumnsDialog(ViewEditor.FetchXml, ViewEditor.LayoutXml);
             select.StartPosition = FormStartPosition.CenterParent;
             if (select.ShowDialog() == DialogResult.OK)
@@ -258,8 +259,9 @@
 
         private void tsbEditXml_Click(object sender, EventArgs e)
         {
-            if (ViewEditor.LayoutXml == null)
+            if (ViewEditor == null || ViewEditor.LayoutXml == null)
             {
+                MessageBox.Show("First select a view to design.", "Edit XML", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
