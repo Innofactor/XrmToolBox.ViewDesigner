@@ -102,13 +102,14 @@
         {
             if (Service == null)
             {
-                MessageBox.Show("Please connect to CRM.", "Edit query", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please connect to CRM.", ((ToolStripButton)sender).Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            Entity view = ViewEditor != null ? ViewEditor.ToEntity() : null;
+
+            var view = ViewEditor != null ? ViewEditor.ToEntity() : null;
             if (view == null || string.IsNullOrEmpty(view.LogicalName))
             {
-                MessageBox.Show("First select a view to design.", "Edit query", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("First select a view to design.", ((ToolStripButton)sender).Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             try
@@ -151,9 +152,10 @@
         {
             if (Service == null)
             {
-                MessageBox.Show("Please connect to CRM.", "Open", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please connect to CRM.", ((ToolStripButton)sender).Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
             var select = new SelectViewDialog(this);
             select.StartPosition = FormStartPosition.CenterParent;
             if (select.ShowDialog() == DialogResult.OK)
@@ -170,13 +172,13 @@
         {
             if (Service == null)
             {
-                MessageBox.Show("Please connect to CRM.", "Publish", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please connect to CRM.", ((ToolStripButton)sender).Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             string entity = ViewEditor != null ? ViewEditor.ViewEntityName : null;
             if (string.IsNullOrEmpty(entity))
             {
-                MessageBox.Show("First select a view to design.", "Publish", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("First select a view to design.", ((ToolStripButton)sender).Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             WorkAsync("Publishing changes",
@@ -190,7 +192,7 @@
                 {
                     if (a.Error != null)
                     {
-                        MessageBox.Show(a.Error.Message, "Publish", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(a.Error.Message, ((ToolStripButton)sender).Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 });
         }
@@ -199,15 +201,17 @@
         {
             if (Service == null)
             {
-                MessageBox.Show("Please connect to CRM.", "Save", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please connect to CRM.", ((ToolStripButton)sender).Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            Entity view = ViewEditor != null ? ViewEditor.ToEntity() : null;
+
+            var view = ViewEditor != null ? ViewEditor.ToEntity() : null;
             if (view == null || string.IsNullOrEmpty(view.LogicalName))
             {
-                MessageBox.Show("First select a view to design.", "Save", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("First select a view to design.", ((ToolStripButton)sender).Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
             WorkAsync("Saving changes",
                 a =>
                 {
@@ -239,7 +243,7 @@
         {
             if (ViewEditor == null || ViewEditor.FetchXml == null)
             {
-                MessageBox.Show("First select a view to design.", "Edit Columns", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("First select a view to design.", ((ToolStripButton)sender).Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -261,7 +265,7 @@
         {
             if (ViewEditor == null || ViewEditor.LayoutXml == null)
             {
-                MessageBox.Show("First select a view to design.", "Edit XML", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("First select a view to design.", ((ToolStripButton)sender).Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
