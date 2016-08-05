@@ -2,12 +2,15 @@
 {
     using Forms;
     using Microsoft.Xrm.Sdk;
+    using Microsoft.Xrm.Sdk.Query;
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using System.Windows.Forms;
     using System.Xml;
     using System.Xml.Linq;
+    using XrmToolBox.Extensibility.Interfaces;
 
     public partial class ViewEditor : UserControl
     {
@@ -115,6 +118,7 @@
             UpdateLogicalName(view);
             UpdateFetchXml(view);
             UpdateLayoutXml(view);
+            UpdateLive(view);
 
             lvDesign.ColumnReordered += lvDesign_ColumnReordered;
             lvDesign.ColumnWidthChanged += lvDesign_ColumnWidthChanged;
@@ -319,6 +323,47 @@
                     }
 
                     lvDesign.Columns.Add(column);
+                }
+            }
+        }
+
+        private void UpdateLive(Entity view)
+        {
+            if (Parent != null)
+            {
+                var service = ((IXrmToolBoxPluginControl)Parent).Service;
+
+                if (service != null)
+                {
+                    new Task(() => 
+                    {
+                        var query = FetchXml;
+                        var queryAttributes = query.FirstChild.Attributes;
+
+                        XmlAttribute count;
+
+                        // Search for 'count' attribute, if any
+                        count = queryAttributes.Cast<XmlAttribute>().Where(x => x.Name == "count").FirstOrDefault();
+
+                        if (count != null)
+                        {
+                            queryAttributes.Remove(count);
+                        }
+
+                        // Adding 'count' attribute to restrict output
+                        count = FetchXml.CreateAttribute("count");
+                        count.Value = "50";
+
+                        // Appending new attribute to query
+                        queryAttributes.Append(count);
+
+                        var result = service.RetrieveMultiple(new FetchExpression(query.InnerXml));
+                        
+                        if (result != null)
+                        {
+                        }
+                       
+                    }).Start();
                 }
             }
         }
