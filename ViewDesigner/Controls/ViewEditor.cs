@@ -61,6 +61,18 @@
 
         #region Public Methods
 
+        public void Preview(bool allow)
+        {
+            if (allow)
+            {
+                Live = true;
+            }
+            else
+            {
+                Live = false;
+            }
+        }
+
         /// <summary>
         /// Updates view designer with most recent definition of the view
         /// </summary>
