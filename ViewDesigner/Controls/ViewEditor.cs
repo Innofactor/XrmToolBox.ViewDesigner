@@ -1,13 +1,14 @@
 ﻿namespace Cinteros.XTB.ViewDesigner.Controls
 {
+    using Forms;
+    using Microsoft.Xrm.Sdk;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Windows.Forms;
     using System.Xml;
     using System.Xml.Linq;
-    using Microsoft.Xrm.Sdk;
-    using System.Collections.Generic;
-    using Forms;
+
     public partial class ViewEditor : UserControl
     {
         #region Private Fields
@@ -28,9 +29,6 @@
 
         #region Public Properties
 
-        public bool IsFetchXmlChanged { get; set; }
-        public bool IsLayoutXmlChanged { get; set; }
-
         public XmlDocument FetchXml
         {
             get;
@@ -43,19 +41,49 @@
             private set;
         }
 
+        public bool IsFetchXmlChanged
+        {
+            get;
+            set;
+        }
+
+        public bool IsLayoutXmlChanged
+        {
+            get;
+            set;
+        }
+
         public XmlDocument LayoutXml
         {
             get;
             private set;
         }
 
-        public bool Snapped { get; private set; }
+        public bool Live
+        {
+            get;
+            private set;
+        }
 
-        public string LogicalName { get; set; }
+        public string LogicalName
+        {
+            get;
+            set;
+        }
+
+        public bool Snapped
+        {
+            get;
+            private set;
+        }
+
+        public string Title
+        {
+            get;
+            set;
+        }
 
         public string ViewEntityName { get; set; }
-
-        public string Title { get; set; }
 
         #endregion Public Properties
 
@@ -148,6 +176,20 @@
         #endregion Internal Methods
 
         #region Private Methods
+
+        private void lvDesign_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            var column = ((ListView)sender).Columns[e.Column];
+
+            var setSizeDialog = new SetSizeDialog(column.Name, column.Width);
+            setSizeDialog.StartPosition = FormStartPosition.CenterParent;
+            setSizeDialog.OnSet += (o, size) =>
+            {
+                column.Width = size;
+            };
+
+            setSizeDialog.ShowDialog();
+        }
 
         private void lvDesign_ColumnReordered(object sender, ColumnReorderedEventArgs e)
         {
@@ -306,20 +348,5 @@
         }
 
         #endregion Private Methods
-
-        private void lvDesign_ColumnClick(object sender, ColumnClickEventArgs e)
-        {
-            var column = ((ListView)sender).Columns[e.Column];
-
-            var setSizeDialog = new SetSizeDialog(column.Name, column.Width);
-            setSizeDialog.StartPosition = FormStartPosition.CenterParent;
-            setSizeDialog.OnSet += (o, size) =>
-            {
-                column.Width = size;
-            };
-
-            setSizeDialog.ShowDialog();
-        }
-        
     }
 }

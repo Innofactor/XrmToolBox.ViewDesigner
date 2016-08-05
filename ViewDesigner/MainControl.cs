@@ -55,6 +55,11 @@
             }
         }
 
+        public string HelpUrl
+        {
+            get { return "http://cinteros.xrmtoolbox.com/?src=VDhelp"; }
+        }
+
         string IGitHubPlugin.RepositoryName
         {
             get
@@ -69,11 +74,6 @@
             {
                 return "Cinteros";
             }
-        }
-
-        public string HelpUrl
-        {
-            get { return "http://cinteros.xrmtoolbox.com/?src=VDhelp"; }
         }
 
         #endregion Public Properties
@@ -92,6 +92,12 @@
         #endregion Public Methods
 
         #region Private Methods
+
+        internal static void DownloadFXB()
+        {
+            var currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            System.Diagnostics.Process.Start("http://fxb.xrmtoolbox.com/?src=VD." + currentVersion);
+        }
 
         private void tsbClose_Click(object sender, EventArgs e)
         {
@@ -140,12 +146,6 @@
                     DownloadFXB();
                 }
             }
-        }
-
-        internal static void DownloadFXB()
-        {
-            var currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            System.Diagnostics.Process.Start("http://fxb.xrmtoolbox.com/?src=VD." + currentVersion);
         }
 
         private void tsbOpen_Click(object sender, EventArgs e)
@@ -284,12 +284,6 @@
         private void tsbLivePreview_Click(object sender, EventArgs e)
         {
             ViewEditor.Preview(((ToolStripButton)sender).Checked);
-
-            UpdatePreview();
-        }
-
-        private void UpdatePreview()
-        {
         }
     }
 }
