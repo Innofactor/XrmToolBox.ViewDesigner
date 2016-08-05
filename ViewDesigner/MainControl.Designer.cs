@@ -126,6 +126,7 @@
             // 
             // tsbLivePreview
             // 
+            this.tsbLivePreview.CheckOnClick = true;
             this.tsbLivePreview.Image = ((System.Drawing.Image)(resources.GetObject("tsbLivePreview.Image")));
             this.tsbLivePreview.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbLivePreview.Name = "tsbLivePreview";

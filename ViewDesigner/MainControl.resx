@@ -183,16 +183,16 @@
   <data name="tsbLivePreview.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAImSURBVDhPtdJfSNNRFAfwo7nC/VaL8i32YqSopWsbWo2y
-        MKISzGpYocOZ6fyzjf3RRksdC7Xlxir1aRD2UkEYRabLKcZS/Nc00WFTiF6Skp5Gk72U34ZcGIKYD/V5
-        PPd8OYd7L/07paRLNaeEqIL8pCY5q26dULd7efbbFJ597IL43qHfVEluMtAedvx3Saak0IvAU7iGm9E2
-        0oDybgV4Rt53MlMJa9lcojEx9Hi6E02DehjelqLWo4Dam49Mh2iVjDRAd+gAa90Y38T/2TnZgnrvdVT1
-        FaKk5yQuvz6Mi33pKHiTCmELPxLdpoke0g4WWY8zc2Hn2C3ovFdQ5jmNol4pCnpToPCmodh3EBWTUpx5
-        tR/UQJ/IShIWi+EsXNg+rkfNwAUo++W41J+Gq0MZUA5nonxCDPWUBNq5HNQH5dhmjZ9nsRiukQu3TmhQ
-        PXQeysFsXHuXgbKxLFT6paiZyYYucAx1C7lo/JKHOGt8gMViOCsXvuuvRq3vHFQ+GVSjYlRNy6CZPYK6
-        YC5sX89C8T4LcS1x89RGYhaLEbQKVhwzGuhH83FjLGdtsnbuKCyf82BaPIV9jwQrZKfb9Jy2s8h6Qrsw
-        8iBgwM0PhdD6T6xNboiue/xl8io5yENPKJm1bkzoEkbcQQtsM8WwLUQvclyCBFfCUvQ/FrGWze108pZ7
-        ltrRsahBepfoF92n9uib72LHW9BMKpF77w9y0gh1kIxV/zeiP31L9o5BJqNNAAAAAElFTkSuQmCC
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAInSURBVDhPtdJfSNNRFAfwM3OF+60W5VvsxUhRS9c2tBpl
+        YUQlmNWwQocz0/lnG/vjH1rTYTibOqzUp4HUSwWhEJkupxhL8V/Thg6bQvSSlPQkTfZSfhtyYQhiPtTn
+        8dzz5RzuvfTvFJE+qTZxlUrJRxpSsOrOifT7V+a+zeDFxyeQtBz7TWXkIiMdYMd/F2+OX+0NPEf7aBNa
+        x6wo6VGCb+J/pzoqZC3bizPFrT6d7ULDsAHGt0Wociuh8eQgrUW8TiYaovt0hLVuTWAW/OyatqPGcxvl
+        A3ko7DuL66+P4+pACnLfJEFkF4Qj2zTQY9rDIptxdVzIOXEXes8NFLvPI79fhtz+RCg9ySjwHkXptAwX
+        Xh0GWekT2UjKYlGchQs5Jg2oHLoC1aAC1waTcXMkFarRNJRMSaCZkUI3n4maoAK7bDELLBbF1XOh5ikt
+        KkYuQzWcgVvvUlE8kY4ynwyV/gzoA6dQvZiF+i/Z4NliAiwWxdm40ANfBaq8l6D2yqEel6B8Vg7t3AlU
+        B7PQ+PUilO/TwbPzFqiVJCwWJWwWrrX5tTCM5+DORObGZN38SVg+Z8O8dA6HuoVr5KB79JJ2s8hmIoco
+        /ChgRO2HPOh8ZzYmWyPrnu5NWKc2ctMzSmCtWxO1i8KuoAWN/gI0LkYuclKK2PbY5ch/zGct29vr5K/0
+        LXegc0mLlG7xL3pIHZE338eOd6CJ1GLXwR/kpDHqJDmr/m9EfwBwFvaHO+p8ZAAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="tsbSelectColumns.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
