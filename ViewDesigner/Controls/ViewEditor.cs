@@ -277,6 +277,11 @@
             return width;
         }
 
+        private void Set(DataCollection<Entity> entities)
+        {
+            throw new NotImplementedException();
+        }
+
         private void UpdateFetchXml(Entity view)
         {
             if (view.Attributes.ContainsKey("fetchxml"))
@@ -335,7 +340,7 @@
 
                 if (service != null)
                 {
-                    new Task(() => 
+                    new Task(() =>
                     {
                         var query = FetchXml;
                         var queryAttributes = query.FirstChild.Attributes;
@@ -358,11 +363,11 @@
                         queryAttributes.Append(count);
 
                         var result = service.RetrieveMultiple(new FetchExpression(query.InnerXml));
-                        
+
                         if (result != null)
                         {
+                            Set(result.Entities);
                         }
-                       
                     }).Start();
                 }
             }
