@@ -37,13 +37,13 @@
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.tsbPublish = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbLivePreview = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbSelectColumns = new System.Windows.Forms.ToolStripButton();
             this.tsbSnap = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbEditFetch = new System.Windows.Forms.ToolStripButton();
             this.tsbEditXml = new System.Windows.Forms.ToolStripButton();
-            this.tsbLivePreview = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.ViewEditor = new Cinteros.XTB.ViewDesigner.Controls.ViewEditor();
             this.tsMenu.SuspendLayout();
             this.SuspendLayout();
@@ -124,6 +124,20 @@
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
             // 
+            // tsbLivePreview
+            // 
+            this.tsbLivePreview.Image = ((System.Drawing.Image)(resources.GetObject("tsbLivePreview.Image")));
+            this.tsbLivePreview.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbLivePreview.Name = "tsbLivePreview";
+            this.tsbLivePreview.Size = new System.Drawing.Size(92, 22);
+            this.tsbLivePreview.Text = "Live Preview";
+            this.tsbLivePreview.Click += new System.EventHandler(this.tsbLivePreview_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
             // tsbSelectColumns
             // 
             this.tsbSelectColumns.Image = ((System.Drawing.Image)(resources.GetObject("tsbSelectColumns.Image")));
@@ -167,19 +181,6 @@
             this.tsbEditXml.Size = new System.Drawing.Size(74, 22);
             this.tsbEditXml.Text = "Edit XML";
             this.tsbEditXml.Click += new System.EventHandler(this.tsbEditXml_Click);
-            // 
-            // tsbLivePreview
-            // 
-            this.tsbLivePreview.Image = ((System.Drawing.Image)(resources.GetObject("tsbLivePreview.Image")));
-            this.tsbLivePreview.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbLivePreview.Name = "tsbLivePreview";
-            this.tsbLivePreview.Size = new System.Drawing.Size(92, 22);
-            this.tsbLivePreview.Text = "Live Preview";
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
             // ViewEditor
             // 

@@ -273,5 +273,10 @@
                 ViewEditor.IsLayoutXmlChanged = true;
             }
         }
+
+        private void tsbLivePreview_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
