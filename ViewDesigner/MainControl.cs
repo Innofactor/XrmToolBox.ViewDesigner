@@ -134,7 +134,7 @@
             }
             catch (PluginNotFoundException)
             {
-                var xtbver = ((System.Windows.Forms.Control)(((System.Windows.Forms.ContainerControl)(this)).ParentForm)).ProductVersion;
+                var xtbver = ParentForm.ProductVersion;
                 if (xtbver == "1.2015.7.6")
                 {
                     MessageBox.Show("XrmToolBox version " + xtbver + " has a minor problem integrating plugins.\nHang in there - new version will be released soon!", "Launching FetchXML Builder",
