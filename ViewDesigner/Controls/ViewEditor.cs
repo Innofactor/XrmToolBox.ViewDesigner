@@ -350,7 +350,7 @@
 
         private void UpdateLive(Entity view)
         {
-            if (Parent != null)
+            if (Live && Parent != null)
             {
                 var service = ((IXrmToolBoxPluginControl)Parent).Service;
 
