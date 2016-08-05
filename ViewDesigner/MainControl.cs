@@ -112,7 +112,7 @@
                 return;
             }
 
-            var view = ViewEditor != null ? ViewEditor.ToEntity() : null;
+            var view = ViewEditor != null ? ViewEditor.ViewChanges : null;
             if (view == null || string.IsNullOrEmpty(view.LogicalName))
             {
                 MessageBox.Show("First select a view to design.", ((ToolStripButton)sender).Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -205,7 +205,7 @@
                 return;
             }
 
-            var view = ViewEditor != null ? ViewEditor.ToEntity() : null;
+            var view = ViewEditor != null ? ViewEditor.ViewChanges : null;
             if (view == null || string.IsNullOrEmpty(view.LogicalName))
             {
                 MessageBox.Show("First select a view to design.", ((ToolStripButton)sender).Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);

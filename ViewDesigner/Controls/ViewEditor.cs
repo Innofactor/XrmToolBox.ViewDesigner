@@ -86,6 +86,50 @@
             set;
         }
 
+        /// <summary>
+        /// Combines all information about design to CRM entity representation.Only changed attributes will be added
+        /// </summary>
+        public Entity ViewChanges
+        {
+            get
+            {
+                var entity = new Entity(LogicalName);
+                entity.Id = Id;
+
+                if (isTitleChanged)
+                {
+                    entity.Attributes["name"] = Title;
+                }
+
+                if (IsFetchXmlChanged)
+                {
+                    entity.Attributes["fetchxml"] = FetchXml.OuterXml;
+                }
+
+                if (IsLayoutXmlChanged)
+                {
+                    entity.Attributes["layoutxml"] = LayoutXml.OuterXml;
+                }
+
+                return entity;
+            }
+        }
+
+        public Entity ViewDefinition
+        {
+            get
+            {
+                var entity = new Entity(LogicalName);
+                entity.Id = Id;
+
+                entity.Attributes["name"] = Title;
+                entity.Attributes["fetchxml"] = FetchXml.OuterXml;
+                entity.Attributes["layoutxml"] = LayoutXml.OuterXml;
+
+                return entity;
+            }
+        }
+
         public string ViewEntityName { get; set; }
 
         #endregion Public Properties
@@ -97,31 +141,34 @@
             if (allow)
             {
                 Live = true;
+                PreviewLive(ViewDefinition);
             }
             else
             {
                 Live = false;
+                lvDesign.Items.Clear();
             }
         }
 
         /// <summary>
         /// Updates view designer with most recent definition of the view
         /// </summary>
-        /// <param name="view"></param>
-        public void Set(Entity view)
+        /// <param name="viewDefinition"></param>
+        public void Set(Entity viewDefinition)
         {
             lvDesign.ColumnWidthChanged -= lvDesign_ColumnWidthChanged;
             lvDesign.ColumnReordered -= lvDesign_ColumnReordered;
 
-            UpdateTitle(view);
-            UpdateId(view);
-            UpdateLogicalName(view);
-            UpdateFetchXml(view);
-            UpdateLayoutXml(view);
-            UpdateLive(view);
+            UpdateTitle(viewDefinition);
+            UpdateId(viewDefinition);
+            UpdateLogicalName(viewDefinition);
+            UpdateFetchXml(viewDefinition);
+            UpdateLayoutXml(viewDefinition);
 
             lvDesign.ColumnReordered += lvDesign_ColumnReordered;
             lvDesign.ColumnWidthChanged += lvDesign_ColumnWidthChanged;
+
+            PreviewLive(viewDefinition);
         }
 
         /// <summary>
@@ -147,39 +194,24 @@
 
         #endregion Public Methods
 
-        #region Internal Methods
-
-        /// <summary>
-        /// Combines all information about design to CRM entity representation. Only changed
-        /// attributes will be added
-        /// </summary>
-        /// <returns></returns>
-        internal Entity ToEntity()
-        {
-            var entity = new Entity(LogicalName);
-            entity.Id = Id;
-
-            if (isTitleChanged)
-            {
-                entity.Attributes["name"] = Title;
-            }
-
-            if (IsFetchXmlChanged)
-            {
-                entity.Attributes["fetchxml"] = FetchXml.OuterXml;
-            }
-
-            if (IsLayoutXmlChanged)
-            {
-                entity.Attributes["layoutxml"] = LayoutXml.OuterXml;
-            }
-
-            return entity;
-        }
-
-        #endregion Internal Methods
-
         #region Private Methods
+
+        private string Extract(AttributeCollection attributes, string name)
+        {
+            if (!attributes.ContainsKey(name))
+            {
+                return default(string);
+            }
+
+            var attribute = attributes[name];
+
+            if (attribute.GetType() == typeof(EntityReference))
+            {
+                return ((EntityReference)attribute).Name;
+            }
+
+            return attribute as string;
+        }
 
         private void lvDesign_ColumnClick(object sender, ColumnClickEventArgs e)
         {
@@ -287,14 +319,54 @@
 
                 foreach (var name in lvDesign.Columns.Cast<ColumnHeader>().Select(x => x.Name).ToArray())
                 {
-                    var item = (entity.Attributes.ContainsKey(name)) ? entity.Attributes[name].ToString() : string.Empty;
-                    row.Add(item);
+                    row.Add(Extract(entity.Attributes, name));
                 }
 
-                Invoke(new Action(() =>
+                lvDesign.Items.Add(new ListViewItem(row.ToArray()));
+            }
+        }
+
+        private void PreviewLive(Entity view)
+        {
+            if (Live && Parent != null)
+            {
+                var service = ((IXrmToolBoxPluginControl)Parent).Service;
+
+                if (service != null)
                 {
-                    lvDesign.Items.Add(new ListViewItem(row.ToArray()));
-                }));
+                    new Task(() =>
+                    {
+                        var query = FetchXml;
+                        var queryAttributes = query.FirstChild.Attributes;
+
+                        XmlAttribute count;
+
+                        // Search for 'count' attribute, if any
+                        count = queryAttributes.Cast<XmlAttribute>().Where(x => x.Name == "count").FirstOrDefault();
+
+                        if (count != null)
+                        {
+                            queryAttributes.Remove(count);
+                        }
+
+                        // Adding 'count' attribute to restrict output
+                        count = FetchXml.CreateAttribute("count");
+                        count.Value = "50";
+
+                        // Appending new attribute to query
+                        queryAttributes.Append(count);
+
+                        var result = service.RetrieveMultiple(new FetchExpression(query.InnerXml));
+
+                        if (result != null)
+                        {
+                            Invoke(new Action(() =>
+                            {
+                                Set(result.Entities);
+                            }));
+                        }
+                    }).Start();
+                }
             }
         }
 
@@ -344,47 +416,6 @@
                     }
 
                     lvDesign.Columns.Add(column);
-                }
-            }
-        }
-
-        private void UpdateLive(Entity view)
-        {
-            if (Live && Parent != null)
-            {
-                var service = ((IXrmToolBoxPluginControl)Parent).Service;
-
-                if (service != null)
-                {
-                    new Task(() =>
-                    {
-                        var query = FetchXml;
-                        var queryAttributes = query.FirstChild.Attributes;
-
-                        XmlAttribute count;
-
-                        // Search for 'count' attribute, if any
-                        count = queryAttributes.Cast<XmlAttribute>().Where(x => x.Name == "count").FirstOrDefault();
-
-                        if (count != null)
-                        {
-                            queryAttributes.Remove(count);
-                        }
-
-                        // Adding 'count' attribute to restrict output
-                        count = FetchXml.CreateAttribute("count");
-                        count.Value = "50";
-
-                        // Appending new attribute to query
-                        queryAttributes.Append(count);
-
-                        var result = service.RetrieveMultiple(new FetchExpression(query.InnerXml));
-
-                        if (result != null)
-                        {
-                            Set(result.Entities);
-                        }
-                    }).Start();
                 }
             }
         }
