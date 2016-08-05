@@ -200,19 +200,26 @@
         {
             if (!attributes.ContainsKey(name))
             {
-                return default(string);
+                return string.Empty;
             }
 
             var attribute = attributes[name];
 
-            if (attribute.GetType() == typeof(EntityReference))
+            if (attribute is DateTime)
+            {
+                return ((DateTime)attribute).ToString("G");
+            }
+            if (attribute is EntityReference)
             {
                 return ((EntityReference)attribute).Name;
             }
-
-            if (attribute.GetType() == typeof(Money))
+            else if (attribute is Money)
             {
-                return ((Money)attribute).Value.ToString();
+                return ((Money)attribute).Value.ToString("C");
+            }
+            else  if (attribute is OptionSetValue)
+            {
+                return ((OptionSetValue)attribute).Value.ToString();
             }
 
             return attribute as string;
@@ -314,23 +321,6 @@
             return width;
         }
 
-        private void Set(DataCollection<Entity> entities)
-        {
-            lvDesign.Items.Clear();
-
-            foreach (var entity in entities)
-            {
-                var row = new List<string>();
-
-                foreach (var name in lvDesign.Columns.Cast<ColumnHeader>().Select(x => x.Name).ToArray())
-                {
-                    row.Add(Extract(entity.Attributes, name));
-                }
-
-                lvDesign.Items.Add(new ListViewItem(row.ToArray()));
-            }
-        }
-
         private void PreviewLive(Entity view)
         {
             if (Live && Parent != null)
@@ -372,6 +362,23 @@
                         }
                     }).Start();
                 }
+            }
+        }
+
+        private void Set(DataCollection<Entity> entities)
+        {
+            lvDesign.Items.Clear();
+
+            foreach (var entity in entities)
+            {
+                var row = new List<string>();
+
+                foreach (var name in lvDesign.Columns.Cast<ColumnHeader>().Select(x => x.Name).ToArray())
+                {
+                    row.Add(Extract(entity.Attributes, name));
+                }
+
+                lvDesign.Items.Add(new ListViewItem(row.ToArray()));
             }
         }
 
