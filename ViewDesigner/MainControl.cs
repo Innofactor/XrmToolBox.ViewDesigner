@@ -41,17 +41,17 @@
         {
             get
             {
-                return this.control;
+                return control;
             }
             set
             {
-                value.Size = this.Size;
+                value.Size = Size;
                 value.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom;
 
-                this.Controls.Remove(this.control);
-                this.Controls.Add(value);
+                Controls.Remove(control);
+                Controls.Add(value);
 
-                this.control = value;
+                control = value;
             }
         }
 
@@ -95,12 +95,12 @@
 
         private void tsbClose_Click(object sender, EventArgs e)
         {
-            this.CloseTool();
+            CloseTool();
         }
 
         private void tsbEditFetch_Click(object sender, EventArgs e)
         {
-            if (this.Service == null)
+            if (Service == null)
             {
                 MessageBox.Show("Please connect to CRM.", "Edit query", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -149,7 +149,7 @@
 
         private void tsbOpen_Click(object sender, EventArgs e)
         {
-            if (this.Service == null)
+            if (Service == null)
             {
                 MessageBox.Show("Please connect to CRM.", "Open", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -168,7 +168,7 @@
 
         private void tsbPublish_Click(object sender, EventArgs e)
         {
-            if (this.Service == null)
+            if (Service == null)
             {
                 MessageBox.Show("Please connect to CRM.", "Publish", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -179,12 +179,12 @@
                 MessageBox.Show("First select a view to design.", "Publish", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            this.WorkAsync("Publishing changes",
+            WorkAsync("Publishing changes",
                 a =>
                 {
                     var pubRequest = new PublishXmlRequest();
                     pubRequest.ParameterXml = string.Format("<importexportxml><entities><entity>{0}</entity></entities><nodes/><securityroles/><settings/><workflows/></importexportxml>", entity);
-                    this.Service.Execute(pubRequest);
+                    Service.Execute(pubRequest);
                 },
                 a =>
                 {
@@ -197,7 +197,7 @@
 
         private void tsbSave_Click(object sender, EventArgs e)
         {
-            if (this.Service == null)
+            if (Service == null)
             {
                 MessageBox.Show("Please connect to CRM.", "Save", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -208,10 +208,10 @@
                 MessageBox.Show("First select a view to design.", "Save", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            this.WorkAsync("Saving changes",
+            WorkAsync("Saving changes",
                 a =>
                 {
-                    this.Service.Update(view);
+                    Service.Update(view);
                 },
                 a =>
                 {

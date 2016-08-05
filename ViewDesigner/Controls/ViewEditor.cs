@@ -70,11 +70,11 @@
             lvDesign.ColumnWidthChanged -= lvDesign_ColumnWidthChanged;
             lvDesign.ColumnReordered -= lvDesign_ColumnReordered;
 
-            this.UpdateTitle(view);
-            this.UpdateId(view);
-            this.UpdateLogicalName(view);
-            this.UpdateFetchXml(view);
-            this.UpdateLayoutXml(view);
+            UpdateTitle(view);
+            UpdateId(view);
+            UpdateLogicalName(view);
+            UpdateFetchXml(view);
+            UpdateLayoutXml(view);
 
             lvDesign.ColumnReordered += lvDesign_ColumnReordered;
             lvDesign.ColumnWidthChanged += lvDesign_ColumnWidthChanged;
@@ -88,7 +88,7 @@
         {
             if (allow)
             {
-                this.Snapped = true;
+                Snapped = true;
 
                 for (var i = 0; i < lvDesign.Columns.Count; i++)
                 {
@@ -97,7 +97,7 @@
             }
             else
             {
-                this.Snapped = false;
+                Snapped = false;
             }
         }
 
@@ -112,22 +112,22 @@
         /// <returns></returns>
         internal Entity ToEntity()
         {
-            var entity = new Entity(this.LogicalName);
-            entity.Id = this.Id;
+            var entity = new Entity(LogicalName);
+            entity.Id = Id;
 
-            if (this.isTitleChanged)
+            if (isTitleChanged)
             {
-                entity.Attributes["name"] = this.Title;
+                entity.Attributes["name"] = Title;
             }
 
-            if (this.IsFetchXmlChanged)
+            if (IsFetchXmlChanged)
             {
-                entity.Attributes["fetchxml"] = this.FetchXml.OuterXml;
+                entity.Attributes["fetchxml"] = FetchXml.OuterXml;
             }
 
-            if (this.IsLayoutXmlChanged)
+            if (IsLayoutXmlChanged)
             {
-                entity.Attributes["layoutxml"] = this.LayoutXml.OuterXml;
+                entity.Attributes["layoutxml"] = LayoutXml.OuterXml;
             }
 
             return entity;
@@ -139,7 +139,7 @@
 
         private void lvDesign_ColumnReordered(object sender, ColumnReorderedEventArgs e)
         {
-            var layout = XDocument.Parse(this.LayoutXml.OuterXml);
+            var layout = XDocument.Parse(LayoutXml.OuterXml);
 
             var cells = layout.Descendants().First().Descendants().First().Descendants();
 
@@ -157,9 +157,9 @@
 
             source.Remove();
 
-            this.LayoutXml.LoadXml(layout.ToString());
+            LayoutXml.LoadXml(layout.ToString());
 
-            this.IsLayoutXmlChanged = true;
+            IsLayoutXmlChanged = true;
         }
 
         private void lvDesign_ColumnWidthChanged(object sender, ColumnWidthChangedEventArgs e)
@@ -171,9 +171,9 @@
             var column = layout.Columns[e.ColumnIndex];
             var definition = (XmlNode)column.Tag;
 
-            if (this.Snapped)
+            if (Snapped)
             {
-                column.Width = this.NormalizeWidth(column.Width);
+                column.Width = NormalizeWidth(column.Width);
             }
 
             var attribute = definition.Attributes["width"];
@@ -184,10 +184,10 @@
                 attribute.Value = width;
 
                 var pattern = string.Format("//cell[@name=\"{0}\"]", definition.Attributes["name"].Value);
-                var cell = this.LayoutXml.SelectNodes(pattern).Cast<XmlNode>().FirstOrDefault();
+                var cell = LayoutXml.SelectNodes(pattern).Cast<XmlNode>().FirstOrDefault();
                 cell = definition;
 
-                this.IsLayoutXmlChanged = true;
+                IsLayoutXmlChanged = true;
             }
 
             lvDesign.ColumnWidthChanged += lvDesign_ColumnWidthChanged;
@@ -223,10 +223,10 @@
         {
             if (view.Attributes.ContainsKey("fetchxml"))
             {
-                this.FetchXml = new XmlDocument();
-                this.FetchXml.LoadXml((string)view.Attributes["fetchxml"]);
-                var entity = this.FetchXml.SelectSingleNode("fetch/entity");
-                this.ViewEntityName = entity != null && entity.Attributes["name"] != null ? entity.Attributes["name"].Value : "";
+                FetchXml = new XmlDocument();
+                FetchXml.LoadXml((string)view.Attributes["fetchxml"]);
+                var entity = FetchXml.SelectSingleNode("fetch/entity");
+                ViewEntityName = entity != null && entity.Attributes["name"] != null ? entity.Attributes["name"].Value : "";
             }
         }
 
@@ -234,8 +234,8 @@
         {
             if (!view.Id.Equals(Guid.Empty))
             {
-                this.Id = view.Id;
-                tbId.Text = this.Id.ToString();
+                Id = view.Id;
+                tbId.Text = Id.ToString();
             }
         }
 
@@ -243,12 +243,12 @@
         {
             if (view.Attributes.ContainsKey("layoutxml"))
             {
-                this.LayoutXml = new XmlDocument();
-                this.LayoutXml.LoadXml((string)view.Attributes["layoutxml"]);
+                LayoutXml = new XmlDocument();
+                LayoutXml.LoadXml((string)view.Attributes["layoutxml"]);
 
-                this.Snapped = true;
+                Snapped = true;
 
-                var columns = this.LayoutXml.SelectNodes("//cell");
+                var columns = LayoutXml.SelectNodes("//cell");
 
                 lvDesign.Columns.Clear();
 
@@ -273,7 +273,7 @@
         {
             if (view.LogicalName != null && !view.LogicalName.Equals(string.Empty))
             {
-                this.LogicalName = view.LogicalName;
+                LogicalName = view.LogicalName;
             }
         }
 
@@ -281,16 +281,16 @@
         {
             if (view.Attributes.ContainsKey("name"))
             {
-                this.Title = (string)view.Attributes["name"];
-                tbName.Text = this.Title;
+                Title = (string)view.Attributes["name"];
+                tbName.Text = Title;
             }
         }
 
         private void ViewDesigner_TextChanged(object sender, EventArgs e)
         {
             var title = (TextBox)sender;
-            this.Title = title.Text;
-            this.isTitleChanged = true;
+            Title = title.Text;
+            isTitleChanged = true;
         }
 
         #endregion Private Methods

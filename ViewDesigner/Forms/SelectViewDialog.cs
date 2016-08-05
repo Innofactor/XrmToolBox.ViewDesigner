@@ -30,7 +30,7 @@
         public SelectViewDialog(PluginControlBase sender)
         {
             InitializeComponent();
-            this.host = sender;
+            host = sender;
         }
 
         #endregion Public Constructors
@@ -39,10 +39,10 @@
 
         internal void LoadViews(Action action)
         {
-            this.host.WorkAsync("Loading views...",
+            host.WorkAsync("Loading views...",
                 (a) =>
                 {
-                    this.views = new Dictionary<string, List<Entity>>();
+                    views = new Dictionary<string, List<Entity>>();
 
                     if (views.Count == 0)
                     {
@@ -59,7 +59,7 @@
                         {
                             qex.EntityName = entity;
 
-                            singleResult = this.host.Service.RetrieveMultiple(qex).Entities;
+                            singleResult = host.Service.RetrieveMultiple(qex).Entities;
                             if (singleResult.Count > 0)
                             {
                                 combinedResult.Add(qex.EntityName, singleResult);
@@ -75,10 +75,10 @@
 
                     foreach (var key in allViews.Keys)
                     {
-                        this.ExtractViews(allViews[key]);
+                        ExtractViews(allViews[key]);
                     }
 
-                    this.entities = this.views.Keys.Select(x => x.Split('|')[0]).Distinct().ToList();
+                    entities = views.Keys.Select(x => x.Split('|')[0]).Distinct().ToList();
 
                     action();
                 });
@@ -92,11 +92,11 @@
         {
             if (cmbView.SelectedItem is ViewItem)
             {
-                this.View = ((ViewItem)cmbView.SelectedItem).GetView();
+                View = ((ViewItem)cmbView.SelectedItem).GetView();
             }
             else
             {
-                this.View = null;
+                View = null;
             }
         }
 
@@ -110,7 +110,7 @@
 
             txtFetch.Text = string.Empty;
 
-            this.LoadViews(this.PopulateForm);
+            LoadViews(PopulateForm);
         }
 
         private void cmbEntity_SelectedIndexChanged(object sender, EventArgs e)
@@ -169,17 +169,17 @@
 
         private void SelectViewDialog_Load(object sender, EventArgs e)
         {
-            if (this.host.Service == null)
+            if (host.Service == null)
             {
                 MessageBox.Show("Need a connection to load views!", "Connection problem", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                this.DialogResult = System.Windows.Forms.DialogResult.Abort;
-                this.Close();
+                DialogResult = System.Windows.Forms.DialogResult.Abort;
+                Close();
 
                 return;
             }
 
-            this.LoadViews(this.PopulateForm);
+            LoadViews(PopulateForm);
         }
 
         private void UpdateViews()

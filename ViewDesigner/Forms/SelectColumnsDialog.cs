@@ -12,9 +12,9 @@
         public SelectColumnsDialog(XmlDocument fetchXml, XmlDocument layoutXml)
             : this()
         {
-            this.LayoutXml = layoutXml;
+            LayoutXml = layoutXml;
             var allowed = GetAttributesFromFetch(fetchXml.SelectSingleNode("fetch/entity"));
-            var selected = this.LayoutXml.SelectNodes("//cell");
+            var selected = LayoutXml.SelectNodes("//cell");
 
             foreach (var column in allowed)
             {
@@ -58,25 +58,25 @@
 
         private void btnOk_Click(object sender, System.EventArgs e)
         {
-            var row = this.LayoutXml.SelectNodes("//row").Cast<XmlNode>().FirstOrDefault();
+            var row = LayoutXml.SelectNodes("//row").Cast<XmlNode>().FirstOrDefault();
             foreach (var item in clbColumns.CheckedItems)
             {
                 var pattern = string.Format("//cell[@name='{0}']", item.ToString());
-                var cell = this.LayoutXml.SelectNodes(pattern).Cast<XmlNode>().FirstOrDefault();
+                var cell = LayoutXml.SelectNodes(pattern).Cast<XmlNode>().FirstOrDefault();
                 if (cell == null)
                 {
-                    cell = this.LayoutXml.CreateNode(XmlNodeType.Element, "cell", string.Empty);
-                    var attribute = this.LayoutXml.CreateAttribute("name");
+                    cell = LayoutXml.CreateNode(XmlNodeType.Element, "cell", string.Empty);
+                    var attribute = LayoutXml.CreateAttribute("name");
                     attribute.Value = item.ToString();
                     cell.Attributes.Append(attribute);
-                    attribute = this.LayoutXml.CreateAttribute("width");
+                    attribute = LayoutXml.CreateAttribute("width");
                     attribute.Value = 100.ToString();
                     cell.Attributes.Append(attribute);
                     row.AppendChild(cell);
                 }
             }
             var removeNodes = new List<XmlNode>();
-            foreach (var cell in this.LayoutXml.SelectNodes("//cell").Cast<XmlNode>())
+            foreach (var cell in LayoutXml.SelectNodes("//cell").Cast<XmlNode>())
             {
                 var col = cell.Attributes["name"].Value;
                 if (!clbColumns.CheckedItems.Contains(col))
