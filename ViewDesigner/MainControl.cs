@@ -283,6 +283,25 @@
 
         private void tsbLivePreview_Click(object sender, EventArgs e)
         {
+            if (Service == null)
+            {
+                MessageBox.Show("Please connect to CRM.", ((ToolStripButton)sender).Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            
+            var view = ViewEditor != null ? ViewEditor.ToEntity() : null;
+            if (view == null || string.IsNullOrEmpty(view.LogicalName))
+            {
+                MessageBox.Show("First select a view to preview.", ((ToolStripButton)sender).Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            UpdatePreview();
+        }
+
+        private void UpdatePreview()
+        {
+
         }
     }
 }
