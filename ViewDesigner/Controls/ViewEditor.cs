@@ -2,14 +2,18 @@
 {
     using Forms;
     using Microsoft.Xrm.Sdk;
+    using Microsoft.Xrm.Sdk.Messages;
+    using Microsoft.Xrm.Sdk.Metadata;
     using Microsoft.Xrm.Sdk.Query;
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.Caching;
     using System.Threading.Tasks;
     using System.Windows.Forms;
     using System.Xml;
     using System.Xml.Linq;
+    using XrmToolBox.Extensibility;
     using XrmToolBox.Extensibility.Interfaces;
 
     public partial class ViewEditor : UserControl
@@ -17,6 +21,7 @@
         #region Private Fields
 
         private static List<int> snapWidths = new List<int>(new int[] { 25, 50, 75, 100, 125, 150, 200, 300 });
+        private MemoryCache cache = new MemoryCache("CommonCache");
         private bool isTitleChanged;
 
         #endregion Private Fields
@@ -196,14 +201,14 @@
 
         #region Private Methods
 
-        private string Extract(AttributeCollection attributes, string name)
+        private string Extract(Entity entity, string name)
         {
-            if (!attributes.ContainsKey(name))
+            if (!entity.Attributes.ContainsKey(name))
             {
                 return string.Empty;
             }
 
-            var attribute = attributes[name];
+            var attribute = entity.Attributes[name];
 
             if (attribute is DateTime)
             {
@@ -217,8 +222,46 @@
             {
                 return ((Money)attribute).Value.ToString("C");
             }
-            else  if (attribute is OptionSetValue)
+            else if (attribute is OptionSetValue)
             {
+                if (Parent != null)
+                {
+                    EnumAttributeMetadata metadata;
+
+                    // Unique key under which information will be associated in memory cache
+                    var key = $"{((PluginControlBase)Parent).ConnectionDetail.ConnectionId}@{entity.LogicalName}@{name}";
+
+                    if (cache.Contains(key))
+                    {
+                        metadata = (EnumAttributeMetadata)cache[key];
+                    }
+                    else
+                    {
+                        var service = ((IXrmToolBoxPluginControl)Parent).Service;
+
+                        var retrieveAttributeResponse = (RetrieveAttributeResponse)service.Execute(new RetrieveAttributeRequest()
+                        {
+                            EntityLogicalName = entity.LogicalName,
+                            LogicalName = name,
+                            RetrieveAsIfPublished = true
+                        });
+
+                        metadata = (EnumAttributeMetadata)retrieveAttributeResponse.AttributeMetadata;
+                    }
+
+                    var actualOption = (OptionSetValue)attribute;
+
+                    foreach (var declaredOption in metadata.OptionSet.Options)
+                    {
+                        if (declaredOption.Value == actualOption.Value)
+                        {
+                            return declaredOption.Label.UserLocalizedLabel.Label;
+                        }
+                    }
+
+                    return string.Empty;
+                }
+                
                 return ((OptionSetValue)attribute).Value.ToString();
             }
 
@@ -373,9 +416,9 @@
             {
                 var row = new List<string>();
 
-                foreach (var name in lvDesign.Columns.Cast<ColumnHeader>().Select(x => x.Name).ToArray())
+                foreach (var attribute in lvDesign.Columns.Cast<ColumnHeader>().Select(x => x.Name).ToArray())
                 {
-                    row.Add(Extract(entity.Attributes, name));
+                    row.Add(Extract(entity, attribute));
                 }
 
                 lvDesign.Items.Add(new ListViewItem(row.ToArray()));
