@@ -187,8 +187,11 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Debug move /Y $(TargetName).* Plugins
-if $(ConfigurationName) == Debug move /Y Cinteros.Xrm.XmlEditorUtils.dll Plugins
+    <PostBuildEvent>if $(ConfigurationName) == Debug (
+  mkdir Plugins
+  move /Y $(TargetName).* Plugins
+  move /Y Cinteros.Xrm.XmlEditorUtils.dll Plugins
+)
 </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
