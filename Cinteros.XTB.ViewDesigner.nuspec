@@ -12,12 +12,12 @@
     <description>Easy UI to design view layouts and alter queries using FetchXML Builder</description>
     <summary>Easy UI to design view layouts and alter queries using FetchXML Builder</summary>
     <releaseNotes>
-      Easy UI to design view layouts and alter queries using FetchXML Builder
+      
     </releaseNotes>
-    <copyright>Copyright 2016 Innofactor AB</copyright>
+    <copyright>Copyright 2015-2018 Innofactor AB</copyright>
     <tags>XrmToolBox Plugins Innofactor ViewDesigner</tags>
     <dependencies>
-      <dependency id="XrmToolBox" version="1.2016.3.30" />
+      <dependency id="XrmToolBox" version="1.2017.10.19" />
     </dependencies>
   </metadata>
   <files>
