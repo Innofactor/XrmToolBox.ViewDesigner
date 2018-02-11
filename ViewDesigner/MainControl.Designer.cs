@@ -67,8 +67,7 @@
             this.tsbEditXml});
             this.tsMenu.Location = new System.Drawing.Point(0, 0);
             this.tsMenu.Name = "tsMenu";
-            this.tsMenu.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.tsMenu.Size = new System.Drawing.Size(900, 25);
+            this.tsMenu.Size = new System.Drawing.Size(799, 25);
             this.tsMenu.TabIndex = 1;
             this.tsMenu.Text = "toolStrip1";
             // 
@@ -170,7 +169,7 @@
             this.tsbEditFetch.Image = ((System.Drawing.Image)(resources.GetObject("tsbEditFetch.Image")));
             this.tsbEditFetch.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbEditFetch.Name = "tsbEditFetch";
-            this.tsbEditFetch.Size = new System.Drawing.Size(82, 22);
+            this.tsbEditFetch.Size = new System.Drawing.Size(82, 20);
             this.tsbEditFetch.Text = "Edit Query";
             this.tsbEditFetch.Click += new System.EventHandler(this.tsbEditFetch_Click);
             // 
@@ -179,7 +178,7 @@
             this.tsbEditXml.Image = ((System.Drawing.Image)(resources.GetObject("tsbEditXml.Image")));
             this.tsbEditXml.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbEditXml.Name = "tsbEditXml";
-            this.tsbEditXml.Size = new System.Drawing.Size(74, 22);
+            this.tsbEditXml.Size = new System.Drawing.Size(74, 20);
             this.tsbEditXml.Text = "Edit XML";
             this.tsbEditXml.Click += new System.EventHandler(this.tsbEditXml_Click);
             // 
@@ -191,22 +190,23 @@
             this.ViewEditor.IsLayoutXmlChanged = false;
             this.ViewEditor.Location = new System.Drawing.Point(0, 25);
             this.ViewEditor.LogicalName = null;
-            this.ViewEditor.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
+            this.ViewEditor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ViewEditor.Name = "ViewEditor";
-            this.ViewEditor.Size = new System.Drawing.Size(900, 590);
+            this.ViewEditor.Size = new System.Drawing.Size(799, 375);
             this.ViewEditor.TabIndex = 2;
             this.ViewEditor.Title = null;
             this.ViewEditor.ViewEntityName = null;
             // 
             // MainControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.ViewEditor);
             this.Controls.Add(this.tsMenu);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "MainControl";
-            this.Size = new System.Drawing.Size(900, 615);
+            this.Size = new System.Drawing.Size(799, 400);
+            this.OnCloseTool += new System.EventHandler(this.MainControl_OnCloseTool);
+            this.Load += new System.EventHandler(this.MainControl_Load);
             this.tsMenu.ResumeLayout(false);
             this.tsMenu.PerformLayout();
             this.ResumeLayout(false);

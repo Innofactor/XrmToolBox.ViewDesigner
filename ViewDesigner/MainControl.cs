@@ -14,6 +14,10 @@
         #region Private Fields
 
         private Control control;
+        private const string aiEndpoint = "https://dc.services.visualstudio.com/v2/track";
+        //private const string aiKey = "cc7cb081-b489-421d-bb61-2ee53495c336";    // jonas@rappen.net tenant, TestAI 
+        private const string aiKey = "eed73022-2444-45fd-928b-5eebd8fa46a6";    // jonas@rappen.net tenant, XrmToolBox
+        private AppInsights ai = new AppInsights(new AiConfig(aiEndpoint, aiKey) { PluginName = "View Designer" });
 
         #endregion Private Fields
 
@@ -122,6 +126,7 @@
             {
                 var messageBusEventArgs = new MessageBusEventArgs("FetchXML Builder");
                 messageBusEventArgs.TargetArgument = ViewEditor.FetchXml.OuterXml;
+                ai.WriteEvent("Edit Query in FXB");
                 OnOutgoingMessage(this, messageBusEventArgs);
             }
             catch (System.IO.FileNotFoundException)
@@ -165,6 +170,7 @@
                 ViewEditor.Enabled = true;
                 ViewEditor.Set(select.View);
                 tsbSnap.Checked = ViewEditor.Snapped;
+                ai.WriteEvent("Open View");
             }
         }
 
@@ -190,12 +196,16 @@
                 })
             {
                 PostWorkCallBack = (a) =>
-                  {
-                      if (a.Error != null)
-                      {
-                          MessageBox.Show(a.Error.Message, ((ToolStripButton)sender).Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                      }
-                  }
+                {
+                    if (a.Error != null)
+                    {
+                        MessageBox.Show(a.Error.Message, ((ToolStripButton)sender).Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        ai.WriteEvent("Publish");
+                    }
+                }
             });
         }
 
@@ -221,18 +231,24 @@
                 })
             {
                 PostWorkCallBack = a =>
-                  {
-                      if (a.Error != null)
-                      {
-                          MessageBox.Show(a.Error.Message, "Save", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                      }
-                  }
+                {
+                    if (a.Error != null)
+                    {
+                        MessageBox.Show(a.Error.Message, "Save", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        ai.WriteEvent("Save View");
+                    }
+                }
             });
         }
 
         private void tsbSnap_Click(object sender, EventArgs e)
         {
-            ViewEditor.Snap(((ToolStripButton)sender).Checked);
+            var snap = ((ToolStripButton)sender).Checked;
+            ViewEditor.Snap(snap);
+            ai.WriteEvent($"Snap: {snap}");
         }
 
         private void UpdateFetch(string fetchxml)
@@ -262,6 +278,7 @@
 
                 ViewEditor.Set(entity);
                 ViewEditor.IsLayoutXmlChanged = true;
+                ai.WriteEvent("Edit Columns");
             }
         }
 
@@ -282,12 +299,25 @@
 
                 ViewEditor.Set(entity);
                 ViewEditor.IsLayoutXmlChanged = true;
+                ai.WriteEvent("Edit LayoutXML");
             }
         }
 
         private void tsbLivePreview_Click(object sender, EventArgs e)
         {
-            ViewEditor.Preview(((ToolStripButton)sender).Checked);
+            var preview = ((ToolStripButton)sender).Checked;
+            ViewEditor.Preview(preview);
+            ai.WriteEvent($"Preview: {preview}");
+        }
+
+        private void MainControl_Load(object sender, EventArgs e)
+        {
+            ai.WriteEvent("Load");
+        }
+
+        private void MainControl_OnCloseTool(object sender, EventArgs e)
+        {
+            ai.WriteEvent("Close");
         }
     }
 }
