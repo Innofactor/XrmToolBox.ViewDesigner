@@ -169,7 +169,7 @@
             this.tsbEditFetch.Image = ((System.Drawing.Image)(resources.GetObject("tsbEditFetch.Image")));
             this.tsbEditFetch.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbEditFetch.Name = "tsbEditFetch";
-            this.tsbEditFetch.Size = new System.Drawing.Size(82, 20);
+            this.tsbEditFetch.Size = new System.Drawing.Size(82, 22);
             this.tsbEditFetch.Text = "Edit Query";
             this.tsbEditFetch.Click += new System.EventHandler(this.tsbEditFetch_Click);
             // 
@@ -178,7 +178,7 @@
             this.tsbEditXml.Image = ((System.Drawing.Image)(resources.GetObject("tsbEditXml.Image")));
             this.tsbEditXml.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbEditXml.Name = "tsbEditXml";
-            this.tsbEditXml.Size = new System.Drawing.Size(74, 20);
+            this.tsbEditXml.Size = new System.Drawing.Size(74, 22);
             this.tsbEditXml.Text = "Edit XML";
             this.tsbEditXml.Click += new System.EventHandler(this.tsbEditXml_Click);
             // 
@@ -205,6 +205,7 @@
             this.Controls.Add(this.tsMenu);
             this.Name = "MainControl";
             this.Size = new System.Drawing.Size(799, 400);
+            this.TabIcon = ((System.Drawing.Image)(resources.GetObject("$this.TabIcon")));
             this.OnCloseTool += new System.EventHandler(this.MainControl_OnCloseTool);
             this.Load += new System.EventHandler(this.MainControl_Load);
             this.tsMenu.ResumeLayout(false);
