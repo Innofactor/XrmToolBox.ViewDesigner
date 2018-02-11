@@ -89,6 +89,7 @@
             if (message.SourcePlugin == "FetchXML Builder" &&
                 message.TargetArgument is string)
             {
+                ai.WriteEvent("Query edited in FXB");
                 UpdateFetch(message.TargetArgument);
             }
         }
@@ -96,12 +97,6 @@
         #endregion Public Methods
 
         #region Private Methods
-
-        internal static void DownloadFXB()
-        {
-            var currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            System.Diagnostics.Process.Start("http://fxb.xrmtoolbox.com/?src=VD." + currentVersion);
-        }
 
         private void tsbClose_Click(object sender, EventArgs e)
         {
@@ -131,11 +126,8 @@
             }
             catch (System.IO.FileNotFoundException)
             {
-                if (MessageBox.Show("FetchXML Builder is not installed.\nDownload latest version from\n\nhttp://fxb.xrmtoolbox.com", "FetchXML Builder",
-                    MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.OK)
-                {
-                    DownloadFXB();
-                }
+                MessageBox.Show("FetchXML Builder is not installed.\nDownload it from the plugins store.", "FetchXML Builder",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             catch (PluginNotFoundException)
             {
@@ -145,10 +137,10 @@
                     MessageBox.Show("XrmToolBox version " + xtbver + " has a minor problem integrating plugins.\nHang in there - new version will be released soon!", "Launching FetchXML Builder",
                         MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
-                else if (MessageBox.Show("FetchXML Builder was not found.\nInstall it from the XrmToolBox Plugin Store or visit\n\nhttp://fxb.xrmtoolbox.com", "FetchXML Builder",
-                    MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.OK)
+                else
                 {
-                    DownloadFXB();
+                    MessageBox.Show("FetchXML Builder is not installed.\nDownload it from the plugins store.", "FetchXML Builder",
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
         }
