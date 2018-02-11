@@ -39,7 +39,7 @@
 
         internal void LoadViews(Action action)
         {
-            host.WorkAsync("Loading views...",
+            host.WorkAsync(new WorkAsyncInfo("Loading views...",
                 (a) =>
                 {
                     views = new Dictionary<string, List<Entity>>();
@@ -68,7 +68,9 @@
 
                         a.Result = combinedResult;
                     }
-                },
+                })
+            {
+                PostWorkCallBack =
                 (a) =>
                 {
                     var allViews = (Dictionary<string, DataCollection<Entity>>)a.Result;
@@ -81,7 +83,8 @@
                     entities = views.Keys.Select(x => x.Split('|')[0]).Distinct().ToList();
 
                     action();
-                });
+                }
+            });
         }
 
         #endregion Internal Methods

@@ -181,20 +181,22 @@
                 MessageBox.Show("First select a view to design.", ((ToolStripButton)sender).Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            WorkAsync("Publishing changes",
-                a =>
+            WorkAsync(new WorkAsyncInfo("Publishing changes",
+                (a) =>
                 {
                     var pubRequest = new PublishXmlRequest();
                     pubRequest.ParameterXml = string.Format("<importexportxml><entities><entity>{0}</entity></entities><nodes/><securityroles/><settings/><workflows/></importexportxml>", entity);
                     Service.Execute(pubRequest);
-                },
-                a =>
-                {
-                    if (a.Error != null)
-                    {
-                        MessageBox.Show(a.Error.Message, ((ToolStripButton)sender).Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                });
+                })
+            {
+                PostWorkCallBack = (a) =>
+                  {
+                      if (a.Error != null)
+                      {
+                          MessageBox.Show(a.Error.Message, ((ToolStripButton)sender).Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                      }
+                  }
+            });
         }
 
         private void tsbSave_Click(object sender, EventArgs e)
@@ -212,18 +214,20 @@
                 return;
             }
 
-            WorkAsync("Saving changes",
+            WorkAsync(new WorkAsyncInfo("Saving changes",
                 a =>
                 {
                     Service.Update(view);
-                },
-                a =>
-                {
-                    if (a.Error != null)
-                    {
-                        MessageBox.Show(a.Error.Message, "Save", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                });
+                })
+            {
+                PostWorkCallBack = a =>
+                  {
+                      if (a.Error != null)
+                      {
+                          MessageBox.Show(a.Error.Message, "Save", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                      }
+                  }
+            });
         }
 
         private void tsbSnap_Click(object sender, EventArgs e)
