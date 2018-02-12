@@ -68,7 +68,7 @@
         {
             get
             {
-                return "XrmToolBox.Plugins";
+                return "XrmToolBox.ViewDesigner";
             }
         }
 
@@ -76,7 +76,7 @@
         {
             get
             {
-                return "Cinteros";
+                return "Innofactor";
             }
         }
 
