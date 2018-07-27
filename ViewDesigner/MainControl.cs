@@ -114,7 +114,7 @@
                 return;
             }
 
-            var view = ViewEditor != null ? ViewEditor.ViewChanges : null;
+            var view = ViewEditor?.ViewChanges;
             if (view == null || string.IsNullOrEmpty(view.LogicalName))
             {
                 MessageBox.Show("First select a view to design.", ((ToolStripButton)sender).Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -176,7 +176,7 @@
                 MessageBox.Show("Please connect to CRM.", ((ToolStripButton)sender).Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            string entity = ViewEditor != null ? ViewEditor.ViewEntityName : null;
+            string entity = ViewEditor?.ViewEntityName;
             if (string.IsNullOrEmpty(entity))
             {
                 MessageBox.Show("First select a view to design.", ((ToolStripButton)sender).Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -212,7 +212,7 @@
                 return;
             }
 
-            var view = ViewEditor != null ? ViewEditor.ViewChanges : null;
+            var view = ViewEditor?.ViewChanges;
             if (view == null || string.IsNullOrEmpty(view.LogicalName))
             {
                 MessageBox.Show("First select a view to design.", ((ToolStripButton)sender).Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
