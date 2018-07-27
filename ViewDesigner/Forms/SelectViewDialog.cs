@@ -4,11 +4,12 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Windows.Forms;
+    using AppCode;
     using Microsoft.Xrm.Sdk;
     using Microsoft.Xrm.Sdk.Query;
-    using XrmToolBox.Extensibility;
-    using AppCode;
     using Xrm.XmlEditorUtils;
+    using XrmToolBox.Extensibility;
+
     public partial class SelectViewDialog : Form
     {
         #region Public Fields

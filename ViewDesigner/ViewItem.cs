@@ -5,27 +5,22 @@
 
     public class ViewItem : IComboBoxItem
     {
+        #region Private Fields
+
         private Entity view = null;
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         public ViewItem(Entity View)
         {
             view = View;
         }
 
-        public override string ToString()
-        {
-            return view["name"].ToString();
-        }
+        #endregion Public Constructors
 
-        public Entity GetView()
-        {
-            return view;
-        }
-
-        public string GetValue()
-        {
-            return view.Id.ToString();
-        }
+        #region Public Methods
 
         public string GetFetch()
         {
@@ -44,5 +39,22 @@
             }
             return "";
         }
+
+        public string GetValue()
+        {
+            return view.Id.ToString();
+        }
+
+        public Entity GetView()
+        {
+            return view;
+        }
+
+        public override string ToString()
+        {
+            return view["name"].ToString();
+        }
+
+        #endregion Public Methods
     }
 }

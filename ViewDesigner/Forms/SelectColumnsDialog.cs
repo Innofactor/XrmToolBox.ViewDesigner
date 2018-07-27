@@ -56,6 +56,8 @@
 
         #endregion Public Properties
 
+        #region Private Methods
+
         private void btnOk_Click(object sender, System.EventArgs e)
         {
             var row = LayoutXml.SelectNodes("//row").Cast<XmlNode>().FirstOrDefault();
@@ -116,5 +118,7 @@
             }
             return result;
         }
+
+        #endregion Private Methods
     }
 }

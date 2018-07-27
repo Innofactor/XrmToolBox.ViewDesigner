@@ -1,11 +1,10 @@
 ﻿namespace Cinteros.XTB.ViewDesigner
 {
+    using System;
+    using System.Windows.Forms;
     using Forms;
     using Microsoft.Crm.Sdk.Messages;
     using Microsoft.Xrm.Sdk;
-    using System;
-    using System.Reflection;
-    using System.Windows.Forms;
     using XrmToolBox.Extensibility;
     using XrmToolBox.Extensibility.Interfaces;
 
@@ -13,11 +12,15 @@
     {
         #region Private Fields
 
-        private Control control;
         private const string aiEndpoint = "https://dc.services.visualstudio.com/v2/track";
-        //private const string aiKey = "cc7cb081-b489-421d-bb61-2ee53495c336";    // jonas@rappen.net tenant, TestAI 
-        private const string aiKey = "eed73022-2444-45fd-928b-5eebd8fa46a6";    // jonas@rappen.net tenant, XrmToolBox
+
+        //private const string aiKey = "cc7cb081-b489-421d-bb61-2ee53495c336";    // jonas@rappen.net tenant, TestAI
+        private const string aiKey = "eed73022-2444-45fd-928b-5eebd8fa46a6";
+
+        // jonas@rappen.net tenant, XrmToolBox
         private AppInsights ai = new AppInsights(new AiConfig(aiEndpoint, aiKey) { PluginName = "View Designer" });
+
+        private Control control;
 
         #endregion Private Fields
 
@@ -251,6 +254,16 @@
 
         #endregion Private Methods
 
+        private void MainControl_Load(object sender, EventArgs e)
+        {
+            ai.WriteEvent("Load");
+        }
+
+        private void MainControl_OnCloseTool(object sender, EventArgs e)
+        {
+            ai.WriteEvent("Close");
+        }
+
         private void tsbEditColumns_Click(object sender, EventArgs e)
         {
             if (ViewEditor == null || ViewEditor.FetchXml == null)
@@ -300,16 +313,6 @@
             var preview = ((ToolStripButton)sender).Checked;
             ViewEditor.Preview(preview);
             ai.WriteEvent($"Preview: {preview}");
-        }
-
-        private void MainControl_Load(object sender, EventArgs e)
-        {
-            ai.WriteEvent("Load");
-        }
-
-        private void MainControl_OnCloseTool(object sender, EventArgs e)
-        {
-            ai.WriteEvent("Close");
         }
     }
 }
