@@ -176,7 +176,7 @@
                 MessageBox.Show("Please connect to CRM.", ((ToolStripButton)sender).Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            string entity = ViewEditor?.ViewEntityName;
+            var entity = ViewEditor?.ViewEntityName;
             if (string.IsNullOrEmpty(entity))
             {
                 MessageBox.Show("First select a view to design.", ((ToolStripButton)sender).Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);

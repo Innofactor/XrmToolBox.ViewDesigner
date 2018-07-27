@@ -72,7 +72,7 @@
         {
             try
             {
-                XmlDocument doc = new XmlDocument();
+                var doc = new XmlDocument();
                 doc.LoadXml(txtXML.Text);
                 result = doc.DocumentElement;
             }

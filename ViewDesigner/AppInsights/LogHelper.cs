@@ -3,7 +3,7 @@
 public class LogHelper {
     public static string GetFullMethodName(MethodBase methodBase)
     {
-        string operationName = "";
+        var operationName = "";
 
         if (methodBase != null)
         {
@@ -17,7 +17,7 @@ public class LogHelper {
 
     public static string GetMethodName(MethodBase methodBase)
     {
-        string methodName = "";
+        var methodName = "";
 
         if (methodBase != null)
             methodName = methodBase.Name;

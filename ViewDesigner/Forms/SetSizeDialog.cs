@@ -39,7 +39,7 @@
 
         private void bSetSize_Click(object sender, EventArgs e)
         {
-            int width = 0;
+            var width = 0;
 
             int.TryParse(cbColumnSize.Text, out width);
 

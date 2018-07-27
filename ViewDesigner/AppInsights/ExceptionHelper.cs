@@ -6,7 +6,7 @@ public class ExceptionHelper
 {
     public static AiException GetAiException(Exception e)
     {
-        AiException aiException = new AiException
+        var aiException = new AiException
         {
             Id = e.HResult,
             TypeName = e.GetType().Name,
@@ -17,10 +17,10 @@ public class ExceptionHelper
         if (aiException.HasFullStack)
             aiException.ParsedStacks = new List<AiParsedStack>();
 
-        Exception currentException = e;
+        var currentException = e;
         while (currentException != null)
         {
-            AiParsedStack parsedStack = ParseStackTrace(e);
+            var parsedStack = ParseStackTrace(e);
             aiException.ParsedStacks.Add(parsedStack);
 
             currentException = currentException.InnerException;
@@ -31,9 +31,9 @@ public class ExceptionHelper
 
     private static AiParsedStack ParseStackTrace(Exception e)
     {
-        StackTrace stackTrace = new StackTrace(e);
-        StackFrame stackFrame = stackTrace.GetFrame(0);
-        AiParsedStack aiParsedStack = new AiParsedStack
+        var stackTrace = new StackTrace(e);
+        var stackFrame = stackTrace.GetFrame(0);
+        var aiParsedStack = new AiParsedStack
 
         {
             Method = stackFrame.GetMethod().Name,
