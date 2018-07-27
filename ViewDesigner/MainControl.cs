@@ -122,8 +122,10 @@
             }
             try
             {
-                var messageBusEventArgs = new MessageBusEventArgs("FetchXML Builder");
-                messageBusEventArgs.TargetArgument = ViewEditor.FetchXml.OuterXml;
+                var messageBusEventArgs = new MessageBusEventArgs("FetchXML Builder")
+                {
+                    TargetArgument = ViewEditor.FetchXml.OuterXml
+                };
                 ai.WriteEvent("Edit Query in FXB");
                 OnOutgoingMessage(this, messageBusEventArgs);
             }
@@ -156,8 +158,10 @@
                 return;
             }
 
-            var select = new SelectViewDialog(this);
-            select.StartPosition = FormStartPosition.CenterParent;
+            var select = new SelectViewDialog(this)
+            {
+                StartPosition = FormStartPosition.CenterParent
+            };
             if (select.ShowDialog() == DialogResult.OK)
             {
                 tsbSnap.Checked = true;
@@ -185,8 +189,10 @@
             WorkAsync(new WorkAsyncInfo("Publishing changes",
                 (a) =>
                 {
-                    var pubRequest = new PublishXmlRequest();
-                    pubRequest.ParameterXml = string.Format("<importexportxml><entities><entity>{0}</entity></entities><nodes/><securityroles/><settings/><workflows/></importexportxml>", entity);
+                    var pubRequest = new PublishXmlRequest
+                    {
+                        ParameterXml = string.Format("<importexportxml><entities><entity>{0}</entity></entities><nodes/><securityroles/><settings/><workflows/></importexportxml>", entity)
+                    };
                     Service.Execute(pubRequest);
                 })
             {
@@ -272,8 +278,10 @@
                 return;
             }
 
-            var select = new SelectColumnsDialog(ViewEditor.FetchXml, ViewEditor.LayoutXml);
-            select.StartPosition = FormStartPosition.CenterParent;
+            var select = new SelectColumnsDialog(ViewEditor.FetchXml, ViewEditor.LayoutXml)
+            {
+                StartPosition = FormStartPosition.CenterParent
+            };
             if (select.ShowDialog() == DialogResult.OK)
             {
                 var entity = new Entity();
@@ -295,8 +303,10 @@
                 return;
             }
 
-            var xcdDialog = new XmlContentDisplayDialog(ViewEditor.LayoutXml.OuterXml, "LayoutXml", true, true);
-            xcdDialog.StartPosition = FormStartPosition.CenterParent;
+            var xcdDialog = new XmlContentDisplayDialog(ViewEditor.LayoutXml.OuterXml, "LayoutXml", true, true)
+            {
+                StartPosition = FormStartPosition.CenterParent
+            };
             if (xcdDialog.ShowDialog() == DialogResult.OK)
             {
                 var entity = new Entity();

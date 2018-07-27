@@ -50,9 +50,10 @@
                         var combinedResult = new Dictionary<string, DataCollection<Entity>>();
                         DataCollection<Entity> singleResult;
 
-                        var qex = new QueryExpression();
-
-                        qex.ColumnSet = new ColumnSet("name", "returnedtypecode", "fetchxml", "layoutxml");
+                        var qex = new QueryExpression
+                        {
+                            ColumnSet = new ColumnSet("name", "returnedtypecode", "fetchxml", "layoutxml")
+                        };
                         qex.Criteria.AddCondition("statecode", ConditionOperator.Equal, 0);
                         qex.AddOrder("name", OrderType.Ascending);
 

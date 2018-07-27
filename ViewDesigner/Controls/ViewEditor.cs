@@ -98,8 +98,10 @@
         {
             get
             {
-                var entity = new Entity(LogicalName);
-                entity.Id = Id;
+                var entity = new Entity(LogicalName)
+                {
+                    Id = Id
+                };
 
                 if (isTitleChanged)
                 {
@@ -124,8 +126,10 @@
         {
             get
             {
-                var entity = new Entity(LogicalName);
-                entity.Id = Id;
+                var entity = new Entity(LogicalName)
+                {
+                    Id = Id
+                };
 
                 entity.Attributes["name"] = Title;
                 entity.Attributes["fetchxml"] = FetchXml.OuterXml;
@@ -280,8 +284,10 @@
         {
             var column = ((ListView)sender).Columns[e.Column];
 
-            var setSizeDialog = new SetSizeDialog(column.Name, column.Width);
-            setSizeDialog.StartPosition = FormStartPosition.CenterParent;
+            var setSizeDialog = new SetSizeDialog(column.Name, column.Width)
+            {
+                StartPosition = FormStartPosition.CenterParent
+            };
             setSizeDialog.OnSet += (o, size) =>
             {
                 column.Width = size;
@@ -468,11 +474,13 @@
 
                 foreach (XmlNode definition in columns)
                 {
-                    var column = new ColumnHeader();
-                    column.Name = definition.Attributes["name"].Value;
-                    column.Text = definition.Attributes["name"].Value;
-                    column.Width = int.Parse(definition.Attributes["width"].Value);
-                    column.Tag = definition;
+                    var column = new ColumnHeader
+                    {
+                        Name = definition.Attributes["name"].Value,
+                        Text = definition.Attributes["name"].Value,
+                        Width = int.Parse(definition.Attributes["width"].Value),
+                        Tag = definition
+                    };
                     if (!snapWidths.Contains(column.Width))
                     {
                         Snapped = false;
